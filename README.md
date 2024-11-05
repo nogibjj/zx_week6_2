@@ -37,6 +37,6 @@ For the ETL-Query lab:
 * Write a query to find correlated fields in the data. Print the query results nicely formatted.
 * Create a second table in the SQLite database and write a join query with the two tables.
 * Build a simple Flask web app that runs queries on demand and displays results.
-* Containerize the application using Docker so the database and queries can be portable
+* Containerize the application using Docker so the database and queries can be portable.
 
 
