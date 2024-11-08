@@ -1,42 +1,104 @@
-## SQLite Lab
+# Complex SQL Query Project
 
-![4 17-etl-sqlite-RAW](https://github.com/nogibjj/sqlite-lab/assets/58792/b39b21b4-ccb4-4cc4-b262-7db34492c16d)
+## Overview
 
+This project implements a complex SQL query on a MySQL database involving joins, aggregations, and sorting, as specified by the assignment. The repository includes all necessary files to set up and run the project, as well as explanations for each component and the query functionality.
 
+## Repository Structure
 
-### Lab:
+- **.devcontainer/**: Contains configuration files for a development container.
+  - `Dockerfile`: Defines the container environment.
+  - `devcontainer.json`: Configures development container settings.
 
-* Use an AI Assistant, but use a different one then you used from a previous lab (Anthropic's Claud, Bard, Copilot, CodeWhisperer, Colab AI, etc)
-* ETL-Query:  [E] Extract a dataset from URL, [T] Transform, [L] Load into SQLite Database and [Q] Query
-For the ETL-Query lab:
-* [E] Extract a dataset from a URL like Kaggle or data.gov. JSON or CSV formats tend to work well.
-* [T] Transform the data by cleaning, filtering, enriching, etc to get it ready for analysis.
-* [L] Load the transformed data into a SQLite database table using Python's sqlite3 module.
-* [Q] Write and execute SQL queries on the SQLite database to analyze and retrieve insights from the data.
+- **.github/workflows/**: Holds the configuration file for CI/CD.
+  - `cicd.yml`: Sets up the CI/CD pipeline to test the SQL query and validate project requirements.
 
-#### Tasks:
+- **data/**: Folder containing sample CSV files used for testing and development.
+  - `GroceryDB_lgFPro.csv`: Sample data file for the grocery database.
+  - `employees.csv`: Sample data file for employee information.
 
-* Fork this project and get it to run
-* Make the query more useful and not a giant mess that prints to screen
-* Convert the main.py into a command-line tool that lets you run each step independantly
-* Fork this project and do the same thing for a new dataset you choose
-* Make sure your project passes lint/tests and has a built badge
-* Include an architectural diagram showing how the project works
+- **mylib/**: Custom Python library for handling data extraction, querying, and transformation.
+  - `__init__.py`: Initializes the `mylib` package.
+  - `extract.py`: Handles data extraction logic.
+  - `query.py`: Contains the complex SQL query.
+  - `transform_load.py`: Processes data transformations and loads it into the database.
 
-#### Reflection Questions
+- **Root Files**:
+  - `.gitignore`: Specifies files and directories ignored by Git.
+  - `Dockerfile`: Builds the project environment.
+  - `LICENSE`: Project license file.
+  - `Makefile`: Defines commands for setting up, testing, and running the project.
+  - `README.md`: Project documentation (this file).
+  - `main.py`: Main script to run the project.
+  - `requirements.txt`: Lists required Python packages.
+  - `setup.sh`: Script for setting up the environment.
+  - `test_main.py`: Contains tests for the project components.
 
-* What challenges did you face when extracting, transforming, and loading the data? How did you overcome them?
-* What insights or new knowledge did you gain from querying the SQLite database?
-* How can SQLite and SQL help make data analysis more efficient? What are the limitations?
-* What AI assistant did you use and how did it compare to others you've tried? What are its strengths and weaknesses?
-* If you could enhance this lab, what would you add or change? What other data would be interesting to load and query?
+## Requirements
 
-##### Challenge Exercises
+To run this project, you need:
+- Docker
+- Python 3.8+
+- A MySQL database instance (or any other SQL/NoSQL database, such as DynamoDB, Databricks, or Neo4j, if swapping is needed).
 
-* Add more transformations to the data before loading it into SQLite. Ideas: join with another dataset, aggregate by categories, normalize columns.
-* Write a query to find correlated fields in the data. Print the query results nicely formatted.
-* Create a second table in the SQLite database and write a join query with the two tables.
-* Build a simple Flask web app that runs queries on demand and displays results.
-* Containerize the application using Docker so the database and queries can be portable.
+Install dependencies by running:
 
+```bash
+pip install -r requirements.txt
+```
 
+## Complex SQL Query
+
+### Query Description
+
+The complex SQL query is located in `mylib/query.py`. It involves:
+- **Joins**: To connect data from multiple tables, such as grocery data and employee information.
+- **Aggregations**: Using functions like `SUM`, `AVG`, and `COUNT` to get summarized insights.
+- **Sorting**: Ordering the results based on specified columns to present data meaningfully.
+
+This query retrieves information on employee sales performance, total sales per product category, and average sales by region, sorted by the highest-performing categories.
+
+### Query Explanation
+
+The query is designed to provide insights into:
+- **Top-performing products and categories** based on total sales.
+- **Sales performance by employee** to identify the most effective team members.
+- **Regional sales trends** to guide marketing and logistics decisions.
+
+#### Expected Results
+The query output will include:
+- Product categories with the highest total sales.
+- Individual employee sales records ranked by performance.
+- Summary of average sales across different regions.
+
+For more details on how the query is structured, refer to `mylib/query.py`.
+
+## CI/CD Pipeline
+
+The CI/CD pipeline is configured using GitHub Actions and can be found in `.github/workflows/cicd.yml`. This pipeline automatically:
+1. Tests the SQL query for functionality and performance.
+2. Validates data loading and extraction scripts.
+3. Ensures code formatting and documentation standards are met.
+
+## How to Run
+
+1. **Set up the Database**: Populate your MySQL database (or the chosen alternative) with the provided CSV files in the `data` folder.
+
+2. **Run the Query**: Use `main.py` to execute the query and view the results.
+
+   ```bash
+   python main.py
+   ```
+
+3. **Testing**: Run tests with the following command:
+
+   ```bash
+   pytest test_main.py
+   ```
+
+## Deliverables
+
+1. **SQL Query**: Located in `mylib/query.py`.
+2. **Explanation**: Descriptions provided in the README and inline comments in `query.py`.
+3. **CI/CD Pipeline**: Configured in `.github/workflows/cicd.yml`.
+4. **Documentation**: This `README.md`.
