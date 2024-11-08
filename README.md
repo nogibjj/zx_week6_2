@@ -1,3 +1,4 @@
+[![CI](https://github.com/nogibjj/zx_week6_2/actions/workflows/cicd.yml/badge.svg)](https://github.com/nogibjj/zx_week6_2/actions/workflows/cicd.yml)
 # Complex SQL Query Project
 
 ## Overview
